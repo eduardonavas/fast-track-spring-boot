@@ -1,0 +1,24 @@
+
+# data source
+spring:
+  main:
+    web-application-type: none
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:file:C:/kafka/h2/orderdb;AUTO_SERVER=TRUE
+    username: sa
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: false
+      
+      
+# kafka config 
+kafka:
+  bootstrap-servers: localhost:29092
+  topic: order-event
+  groupId: order-event-group-1
