@@ -8,7 +8,7 @@
 Avaliação fast-track spring boot
 
 ### **2 Escopo**
-MicroServiço responsavél pelo crud do objeto Order e geração de evento no topico kafka .
+MicroServiço responsável pelo crud do objeto Order e geração de evento no topico kafka .
 
 ### **3 Componentes**
 
