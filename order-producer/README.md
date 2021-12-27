@@ -18,7 +18,7 @@ MicroServiço responsável pelo crud do objeto Order e geração de evento no to
 #### 4.1 Swagger
 > [swagger.json](src/main/resources/static/documents/swagger.json)
 
-A pagina do swagger esta exposta no link http://localhost:9999/swagger.html
+Ao executar a aplicação a pagina do swagger ficará exposta no link http://localhost:9999/swagger.html
 
 #### 4.2 Collection
 > [Collection-Postman.json](src/main/resources/static/documents/Fast_Track_Spring_boot.postman_collection.json)
