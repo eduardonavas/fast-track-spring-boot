@@ -21,7 +21,7 @@ MicroServiço responsavél pelo crud do objeto Order e geração de evento no to
 A pagina do swagger esta exposta no link http://localhost:9999/swagger.html
 
 #### 4.2 Collection
-> [Collection-Postman.json](src/main/resources/static/documents/Fast-Track Spring boot.postman_collection.json)
+> [Collection-Postman.json](src/main/resources/static/documents/Fast_Track_Spring_boot.postman_collection.json)
 
 ### 5 Operações
 #### 5.1 Save
