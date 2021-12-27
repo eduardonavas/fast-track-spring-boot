@@ -18,7 +18,7 @@ MicroServiço responsavél consumir eventos do topico kafka atualizar status do 
 #### 4.1 Consumo do topico kafka
 Consme uma order do topico kafka, verifica se a order consumida existe no banco, se sim atualiza o status do order para PROCESSED e salva a order atualizada no banco de dados.
 
-![nome](src/main/resources/static/img/diagrama_sequencia_consume_order.png)
+![nome](src/main/resources/static/img/diagrama_sequencia_consume_order.PNG)
 
 
 ### **5. Adapters**
