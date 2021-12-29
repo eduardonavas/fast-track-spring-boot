@@ -55,11 +55,7 @@ public class OrderPortInService implements OrderPortIn{
 	@Override
 	public List<OrderDto> search(String maxTotal, String minTotal, StatusEnum status, String q) {
 		List<OrderDto> orderDtoList =  orderPortOut.search(maxTotal, minTotal, status, q).stream().map(order -> util.toOrderDto(order)).collect(Collectors.toList());
-		
-		if(orderDtoList.isEmpty()) {
-			throw new BusinessException(ExceptionEnum.NOT_FOUND);
-		}
-		
+				
 		return orderDtoList;
 		
 	}
