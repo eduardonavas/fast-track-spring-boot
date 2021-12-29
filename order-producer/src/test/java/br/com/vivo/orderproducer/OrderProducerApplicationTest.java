@@ -27,9 +27,9 @@ import br.com.vivo.orderproducer.application.port.out.OrderEventPortOut;
 import br.com.vivo.orderproducer.domain.Order;
 import br.com.vivo.orderproducer.domain.StatusEnum;
 import br.com.vivo.orderproducer.domain.dto.OrderDto;
-import br.com.vivo.orderproducer.framewor.adapter.exception.BusinessException;
-import br.com.vivo.orderproducer.framewor.adapter.in.rest.OrderController;
-import br.com.vivo.orderproducer.framewor.adapter.out.repository.OrderRepository;
+import br.com.vivo.orderproducer.framework.adapter.exception.BusinessException;
+import br.com.vivo.orderproducer.framework.adapter.in.rest.OrderController;
+import br.com.vivo.orderproducer.framework.adapter.out.repository.OrderRepository;
 
 @SpringBootTest
 class OrderProducerApplicationTest {

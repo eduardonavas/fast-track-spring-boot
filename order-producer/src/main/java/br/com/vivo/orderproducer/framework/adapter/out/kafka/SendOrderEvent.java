@@ -1,4 +1,4 @@
-package br.com.vivo.orderproducer.framewor.adapter.out.kafka;
+package br.com.vivo.orderproducer.framework.adapter.out.kafka;
 
 import java.util.UUID;
 

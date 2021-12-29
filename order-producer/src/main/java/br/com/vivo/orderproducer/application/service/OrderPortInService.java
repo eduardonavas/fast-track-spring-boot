@@ -12,9 +12,9 @@ import br.com.vivo.orderproducer.application.port.out.OrderPortOut;
 import br.com.vivo.orderproducer.domain.Order;
 import br.com.vivo.orderproducer.domain.StatusEnum;
 import br.com.vivo.orderproducer.domain.dto.OrderDto;
-import br.com.vivo.orderproducer.framewor.adapter.exception.BusinessException;
-import br.com.vivo.orderproducer.framewor.adapter.exception.ExceptionEnum;
-import br.com.vivo.orderproducer.framewor.adapter.util.Util;
+import br.com.vivo.orderproducer.framework.adapter.exception.BusinessException;
+import br.com.vivo.orderproducer.framework.adapter.exception.ExceptionEnum;
+import br.com.vivo.orderproducer.framework.adapter.util.Util;
 
 @Service
 public class OrderPortInService implements OrderPortIn{

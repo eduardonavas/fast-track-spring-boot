@@ -1,4 +1,4 @@
-package br.com.vivo.orderproducer.framewor.adapter.exception;
+package br.com.vivo.orderproducer.framework.adapter.exception;
 
 import lombok.Getter;
 

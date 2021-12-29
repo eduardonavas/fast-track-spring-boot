@@ -1,10 +1,11 @@
-package br.com.vivo.orderproducer.framewor.adapter.in.rest;
+package br.com.vivo.orderproducer.framework.adapter.in.rest;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,15 +40,16 @@ public class OrderController {
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<List<OrderDto>> search(@RequestParam("max_total") String maxTotal, @RequestParam("min_total") String minTotal,
-			@RequestParam StatusEnum status, @RequestParam String q){
+	public ResponseEntity<List<OrderDto>> search(@RequestParam(name = "max_total", required = false) String maxTotal, 
+			@RequestParam(name = "min_total", required = false) String minTotal,
+			@RequestParam(required = false) StatusEnum status, @RequestParam(required = false) String q){
 		
 		return ResponseEntity.ok(orderPortIn.search(maxTotal, minTotal, status, q));
 	}
 	
 	@PostMapping
 	public ResponseEntity<OrderDto> save(@RequestBody @Valid OrderDto orderDto){
-		return ResponseEntity.ok(orderPortIn.save(orderDto));
+		return new ResponseEntity<>(orderPortIn.save(orderDto), HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")

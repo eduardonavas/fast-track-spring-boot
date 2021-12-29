@@ -1,4 +1,4 @@
-package br.com.vivo.orderproducer.framewor.adapter.out;
+package br.com.vivo.orderproducer.framework.adapter.out;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import br.com.vivo.orderproducer.application.port.out.OrderPortOut;
 import br.com.vivo.orderproducer.domain.Order;
 import br.com.vivo.orderproducer.domain.StatusEnum;
-import br.com.vivo.orderproducer.framewor.adapter.exception.BusinessException;
-import br.com.vivo.orderproducer.framewor.adapter.exception.ExceptionEnum;
-import br.com.vivo.orderproducer.framewor.adapter.out.repository.OrderRepository;
+import br.com.vivo.orderproducer.framework.adapter.exception.BusinessException;
+import br.com.vivo.orderproducer.framework.adapter.exception.ExceptionEnum;
+import br.com.vivo.orderproducer.framework.adapter.out.repository.OrderRepository;
 
 @Service
 public class PersistOrder implements OrderPortOut {
@@ -33,8 +33,8 @@ public class PersistOrder implements OrderPortOut {
 
 	@Override
 	public List<Order> search(String maxTotal, String minTotal, StatusEnum status, String q) {
-		Double max = Double.parseDouble(maxTotal);
-		Double min = Double.parseDouble(minTotal);
+		Double max = maxTotal == null ? null : Double.parseDouble(maxTotal);
+		Double min = minTotal == null ? null : Double.parseDouble(minTotal);
 		
 		return orderRepository.search(max, min, status, q);
 		

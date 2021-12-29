@@ -1,4 +1,4 @@
-package br.com.vivo.orderproducer.framewor.adapter.exception;
+package br.com.vivo.orderproducer.framework.adapter.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

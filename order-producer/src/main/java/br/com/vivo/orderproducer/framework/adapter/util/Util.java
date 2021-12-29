@@ -1,4 +1,4 @@
-package br.com.vivo.orderproducer.framewor.adapter.util;
+package br.com.vivo.orderproducer.framework.adapter.util;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
