@@ -1,2 +1,12 @@
 # fast-track-spring-boot
-# Cadas projeto tem o seu arquivo README com suas respectivas informações.
+### **Requsitos**
+java 11 ou superior
+maven 3.8.x
+kafka
+
+### **Execução**
+Na pasta do projeto entrar com o comando mvn clean install.
+
+Após o comando finalizar com sucesso, entrar na pasta target e executar o comando java -jar {nome do jar}.jar
+
+![order-producer](order-consumer)
