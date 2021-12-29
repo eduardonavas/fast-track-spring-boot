@@ -19,15 +19,15 @@ import lombok.Setter;
 public class OrderDto {
 	
 	private Long id;
-	@NotNull
-	@NotBlank(message = "name field cannot be empty")
+	@NotNull(message = "the name field cannot be null")
+	@NotBlank(message = "the name field cannot be empty")
 	private String name;
-	@NotNull
-	@NotBlank(message = "description field cannot be empty")
+	@NotNull(message = "the description field cannot be null")
+	@NotBlank(message = "the description field cannot be empty")
 	private String description;
-	@NotNull
+	@NotNull(message = "the total field cannot be null")
 	private Double total;
-	@NotNull
+	@NotNull(message = "the status field cannot be null")
 	@Valid
 	private StatusEnum status;
 }

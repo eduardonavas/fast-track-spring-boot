@@ -1,6 +1,8 @@
 package br.com.vivo.orderconsumer;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import br.com.vivo.orderconsumer.application.port.in.OrderPortIn;
 import br.com.vivo.orderconsumer.domain.Order;
 import br.com.vivo.orderconsumer.domain.StatusEnum;
+import br.com.vivo.orderconsumer.framework.adapter.exception.OrderNotFoundException;
 import br.com.vivo.orderconsumer.framework.adapter.out.repository.OrderRepository;
 
 @SpringBootTest
@@ -40,5 +43,17 @@ class OrderConsumerApplicationTests {
 		
 		assertEquals(StatusEnum.PROCESSED, order.getStatus());		
 		
+	}
+	
+	@Test
+	void orderNotFound() {
+		Order order = new Order();
+		order.setId(999l);
+		order.setName("order teste");
+		order.setDescription("order description teste");
+		order.setStatus(StatusEnum.NOT_PROCESSED);
+		order.setTotal(2000d);
+				
+		assertDoesNotThrow(() -> orderPortIn.consume(order));
 	}
 }

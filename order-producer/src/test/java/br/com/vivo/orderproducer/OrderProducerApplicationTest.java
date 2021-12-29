@@ -1,5 +1,6 @@
 package br.com.vivo.orderproducer;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,6 +29,7 @@ import br.com.vivo.orderproducer.domain.Order;
 import br.com.vivo.orderproducer.domain.StatusEnum;
 import br.com.vivo.orderproducer.domain.dto.OrderDto;
 import br.com.vivo.orderproducer.framework.adapter.exception.BusinessException;
+import br.com.vivo.orderproducer.framework.adapter.exception.InvalidTotalException;
 import br.com.vivo.orderproducer.framework.adapter.in.rest.OrderController;
 import br.com.vivo.orderproducer.framework.adapter.out.repository.OrderRepository;
 
@@ -75,6 +77,8 @@ class OrderProducerApplicationTest {
 		verify(orderRepository).save(captor.capture());
 		StatusEnum resultEnum = captor.getValue().getStatus();
 			
+		assertDoesNotThrow(() -> orderController.save(orderDto));
+		
 		assertEquals(orderDto.getName(), response.getBody().getName());
 		assertEquals(orderDto.getDescription(), response.getBody().getDescription());
 		assertEquals(StatusEnum.NOT_PROCESSED, resultEnum);
@@ -94,7 +98,7 @@ class OrderProducerApplicationTest {
 		
 		BDDMockito.given(orderRepository.findById(any())).willReturn(Optional.of(new Order()));
 		BDDMockito.given(orderRepository.save(any())).willReturn(buildOrderReturn(orderUpdate));
-					
+							
 		ResponseEntity<OrderDto> response = orderController.update(orderDto, 1l);
 					
 		assertEquals(orderUpdate.getName(), response.getBody().getName());
@@ -149,12 +153,105 @@ class OrderProducerApplicationTest {
 	}
 	
 	@Test
+	void searchOrderMinTotalNullTest() {
+				
+		BDDMockito.given(orderRepository.search(any(), any(), any(), any())).willReturn(buildListOrder());
+					
+		ResponseEntity<List<OrderDto>> response = orderController.search(null, "1", StatusEnum.PROCESSED, "");
+					
+		assertEquals(3, response.getBody().size());		
+	}
+	
+	@Test
+	void searchOrderMaxTotalNullTest() {
+				
+		BDDMockito.given(orderRepository.search(any(), any(), any(), any())).willReturn(buildListOrder());
+					
+		ResponseEntity<List<OrderDto>> response = orderController.search("1",null, StatusEnum.PROCESSED, "");
+					
+		assertEquals(3, response.getBody().size());		
+	}
+	
+	@Test
+	void updateTotalZero() {
+		OrderDto orderDto = new OrderDto();
+		
+		orderDto.setTotal(0d);
+		
+		assertThrows(InvalidTotalException.class, () ->{
+			orderController.update(orderDto, 1l);
+		});
+		
+	}
+	
+	@Test
+	void updateTotalNegativo() {
+		OrderDto orderDto = new OrderDto();
+		
+		orderDto.setTotal(-1d);
+		
+		assertThrows(InvalidTotalException.class, () ->{
+			orderController.update(orderDto, 1l);
+		});
+		
+	}
+	
+	@Test
+	void saveTotalZero() {
+		OrderDto orderDto = new OrderDto();
+		
+		orderDto.setTotal(0d);
+		
+		assertThrows(InvalidTotalException.class, () ->{
+			orderController.update(orderDto, 1l);
+		});
+		
+	}
+	
+	@Test
+	void saveTotalNegativo() {
+		OrderDto orderDto = new OrderDto();
+		
+		orderDto.setTotal(-1d);
+		
+		assertThrows(InvalidTotalException.class, () ->{
+			orderController.update(orderDto, 1l);
+		});
+		
+	}
+	
+	@Test
+	void saveTotalok() {
+		OrderDto orderDto = new OrderDto();
+		
+		orderDto.setTotal(1d);
+		
+		BDDMockito.given(orderRepository.save(any())).willReturn(new Order());
+		
+		assertDoesNotThrow(() -> orderController.save(orderDto));
+		
+	}
+	
+	@Test
+	void updateTotalok() {
+		OrderDto orderDto = new OrderDto();
+		
+		orderDto.setTotal(1d);
+		
+		BDDMockito.given(orderRepository.findById(any())).willReturn(Optional.of(new Order()));
+		BDDMockito.given(orderRepository.save(any())).willReturn(new Order());
+		
+		assertDoesNotThrow(() -> orderController.update(orderDto, 1l));
+		
+	}
+	
+	@Test
 	void searchNotFoutOrderTest() {
 				
 		assertThrows(BusinessException.class, () -> {
 			orderController.search("1", "1", StatusEnum.PROCESSED, "");
 		});		
-					
+		
 	}
 	
 	@Test

@@ -110,7 +110,7 @@
 						<exclude>**/domain/**</exclude>
 						<exclude>**/exception/**</exclude>
 						<exclude>**/kafka/**</exclude>
-						<exclude>**/OrderProducerApplication.java</exclude>						
+						<exclude>**/OrderProducerApplication.class</exclude>						
 					</excludes>
 				</configuration>
 				<version>0.8.6</version>

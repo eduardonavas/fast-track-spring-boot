@@ -14,12 +14,16 @@ import br.com.vivo.orderproducer.domain.StatusEnum;
 import br.com.vivo.orderproducer.domain.dto.OrderDto;
 import br.com.vivo.orderproducer.framework.adapter.exception.BusinessException;
 import br.com.vivo.orderproducer.framework.adapter.exception.ExceptionEnum;
+import br.com.vivo.orderproducer.framework.adapter.exception.InvalidTotalException;
 import br.com.vivo.orderproducer.framework.adapter.util.Util;
 
 @Service
 public class OrderPortInService implements OrderPortIn{
 	
 	private static final Long DEFAULT_ID = 0L; 
+	
+	private static final String MESSAGE_EXCEPTION_VALOR_ZERO = "O total nao pode ser igual a zero";
+	private static final String MESSAGE_EXCEPTION_VALOR_NEGATIVO = "O total nao pode ser negativo";
 	
 	@Autowired
 	private OrderPortOut orderPortOut;
@@ -32,6 +36,7 @@ public class OrderPortInService implements OrderPortIn{
 		
 	@Override
 	public OrderDto save(OrderDto orderDto) {
+		checkOrdertotalValue(orderDto.getTotal());
 		orderDto.setId(DEFAULT_ID);
 		orderDto.setStatus(StatusEnum.NOT_PROCESSED);
 		Order order = orderPortOut.save(util.toOrder(orderDto));
@@ -67,7 +72,7 @@ public class OrderPortInService implements OrderPortIn{
 
 	@Override
 	public OrderDto update(OrderDto orderDto, Long id) {
-		
+		checkOrdertotalValue(orderDto.getTotal());
 		findById(id);
 		
 		orderDto.setId(id);
@@ -80,5 +85,11 @@ public class OrderPortInService implements OrderPortIn{
 		
 		return util.toOrderDto(orderPortOut.delete(id));
 		
-	}	
+	}
+	
+	private void checkOrdertotalValue(Double total) {
+		if(total <= 0) {
+			throw new InvalidTotalException(total < 0 ? MESSAGE_EXCEPTION_VALOR_NEGATIVO : MESSAGE_EXCEPTION_VALOR_ZERO);
+		}
+	}
 }

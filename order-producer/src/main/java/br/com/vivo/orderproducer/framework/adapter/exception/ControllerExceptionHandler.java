@@ -31,6 +31,18 @@ public class ControllerExceptionHandler {
 		return new ResponseEntity<>(exceptionModel, null,  exceptionModel.getStatusCode());
 	}
 	
+	@ExceptionHandler({InvalidTotalException.class})
+	public ResponseEntity<ExceptionModel> invalidTotalException(InvalidTotalException e){
+		ExceptionModel exceptionModel = ExceptionModel.builder()
+				.message(e.getMessage())
+				.statusCode(400)
+				.build();		
+		
+		return new ResponseEntity<>(exceptionModel, null,  exceptionModel.getStatusCode());
+	}
+	
+	
+	
 	@ExceptionHandler({HttpMessageNotReadableException.class})
 	public ResponseEntity<ExceptionModel> bussinesException(HttpMessageNotReadableException e){
 		ExceptionModel exceptionModel = ExceptionModel.builder()
